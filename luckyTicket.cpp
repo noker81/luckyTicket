@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #include <vcl.h>
+#include <random>
 #pragma hdrstop
 
 #include "luckyTicket.h"
@@ -9,11 +10,17 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 int totalTrue = 0, totalFalse = 0, totalMirror = 0;
+int totalTickets = 1000000;
+int passArray[1000000];
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
+	int passArraySize = sizeof(passArray) / sizeof(int);
+	for (int i = 0; i < passArraySize; i++){
+		passArray[i] = i;
+	}
 }
 
 void statistics_update() {
@@ -24,14 +31,15 @@ void statistics_update() {
 	Form1->Labelfalse->Caption = IntToStr(totalFalse) + " / " \
 			+ FloatToStr(totalFalse*100/(totalTrue + totalFalse)) + "%";
 
-	String msg = 0;
+	String msg = "0";
 	if (totalTrue + totalMirror > 0)
 		msg = FloatToStr(totalMirror*100/(totalTrue + totalMirror));
 
 	Form1->LabelMirror->Caption = IntToStr(totalMirror) + " / " \
 			+ msg + "% от счастливых";
 
-	Form1->LabelTotal->Caption = IntToStr(totalFalse + totalTrue);
+	Form1->LabelTotal->Caption = IntToStr(totalFalse + totalTrue) + " / " \
+			" осталось " + totalTickets;
 	return;
 }
 
@@ -47,8 +55,9 @@ void ticket_check() {
 	String x_str = IntToStr(num[0]) + IntToStr(num[1]) + IntToStr(num[2]);
 	String y_str = IntToStr(num[5]) + IntToStr(num[4]) + IntToStr(num[3]);
 
+
 	if (x == y) {
-		String msg = y_str;
+		String msg = "";
 		if (x_str == y_str) {
 			msg = " / «еркальный";
 			totalMirror++;
@@ -75,13 +84,35 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::randomButtonClick(TObject *Sender)
 {
-	for (int i=1; i<7; ++i) {
-		TEdit *Edit = (TEdit *)FindComponent("Edit" + AnsiString(i));
-		Edit->Text = IntToStr(rand()%10);
-	}
-	Label2->Caption = "";
 
-	ticket_check();
+	if (totalTickets > 0) {
+
+		//rand() устарела, генерирует плохо
+		//RAND_MAX обычно равно 32767 дл€
+		std::random_device r;
+		std::default_random_engine e1(r());
+		std::uniform_int_distribution<int> uniform_dist(0, totalTickets - 1);
+
+		int number = uniform_dist(e1);
+		int randomTicket = passArray[number];
+		int a = 100000;
+		for (int i=1; i<7; ++i) {
+			TEdit *Edit = (TEdit *)FindComponent("Edit" + AnsiString(i));
+			Edit->Text = IntToStr(randomTicket % (a*10) / a);
+			a /= 10;
+		}
+		Label2->Caption = "";
+		//”дал€ем билет из массива
+		for (long i = number; i < totalTickets; ++i){
+		  passArray[i] = passArray[i + 1];
+		}
+		--totalTickets;
+
+		ticket_check();
+	}
+	else {
+		Label2->Caption = "¬се билеты проданы.";
+    }
 }
 //---------------------------------------------------------------------------
 

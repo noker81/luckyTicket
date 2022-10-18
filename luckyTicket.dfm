@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = #1057#1090#1086#1083#1103#1088#1086#1074' '#1056'.'#1040'.'
+  Caption = #1057#1095#1072#1089#1090#1083#1080#1074#1099#1081' '#1073#1080#1083#1077#1090
   ClientHeight = 387
   ClientWidth = 658
   Color = clBtnFace
@@ -23,7 +23,7 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 8
     Top = 54
-    Width = 117
+    Width = 3
     Height = 13
   end
   object Label3: TLabel
@@ -54,9 +54,9 @@ object Form1: TForm1
     Caption = #1054#1073#1099#1095#1085#1099#1077':'
   end
   object Labeltrue: TLabel
-    Left = 101
+    Left = 89
     Top = 99
-    Width = 63
+    Width = 7
     Height = 13
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET
@@ -67,9 +67,9 @@ object Form1: TForm1
     ParentFont = False
   end
   object Labelfalse: TLabel
-    Left = 101
+    Left = 89
     Top = 118
-    Width = 73
+    Width = 7
     Height = 13
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET
@@ -105,14 +105,14 @@ object Form1: TForm1
   object Label7: TLabel
     Left = 8
     Top = 169
-    Width = 76
+    Width = 48
     Height = 13
-    Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083'-'#1074#1086':'
+    Caption = #1055#1088#1086#1076#1072#1085#1086':'
   end
   object LabelTotal: TLabel
-    Left = 101
+    Left = 89
     Top = 169
-    Width = 100
+    Width = 7
     Height = 13
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET
@@ -130,9 +130,9 @@ object Form1: TForm1
     Caption = #1047#1077#1088#1082#1072#1083#1100#1085#1099#1077':'
   end
   object LabelMirror: TLabel
-    Left = 101
+    Left = 89
     Top = 137
-    Width = 63
+    Width = 7
     Height = 13
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET
@@ -196,6 +196,7 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = #1055#1088#1086#1074#1077#1088#1080#1090#1100
+    Enabled = False
     TabOrder = 6
     OnClick = Button1Click
   end
@@ -204,7 +205,7 @@ object Form1: TForm1
     Top = 25
     Width = 86
     Height = 25
-    Caption = #1057#1075#1077#1085#1077#1088#1080#1088#1086#1074#1072#1090#1100
+    Caption = #1050#1091#1087#1080#1090#1100' '#1073#1080#1083#1077#1090
     TabOrder = 7
     OnClick = randomButtonClick
   end
